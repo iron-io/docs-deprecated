@@ -11,7 +11,7 @@ breadcrumbs:
 ---
 
 Sending notifications is a required part of almost any application or service.
-Whether it's sending email verification emails, texting users, sending out a
+Whether it's sending verification emails, texting users, sending out a
 newsletter, emailing usage data, or even a more complicated use case, it's
 important for you to keep in communication with your users.
 
@@ -33,9 +33,8 @@ Notification workers generally follow the same three-step process:
    emails and notifications&mdash;alerts, daily summaries, weekly updates,
    personalized offers, special notices, and more.
 2. **Choose Your Delivery Gateway**. Use an SMTP gateway like
-   [SendGrid](http://www.sendgrid.com) or an API like Android [C2DM](http://developers.google.com/android/c2dm)
-   and [Twilio](http://www.twilio.com) to manage the actual sending,
-   monitoring, and analysis of the delivery step.
+   [SendGrid](http://www.sendgrid.com) or an API like [Ringcaptcha](https://ringcaptcha.com/)
+   to manage the actual sending, monitoring, and analysis of the delivery step.
 3. **Process and Send Notifications in Parallel**. Use IronWorker to handle the
    processing and interface with the gateway. Queue up thousands of jobs
    at once or use scheduled jobs to send messages at set times.
@@ -46,8 +45,8 @@ The worker can also be split up into three major steps: initializing the
 notification headers, preparing and sending the notification, and signaling
 exceptions and recording the status.
 
-For a detailed example using SendGrid, IronWorker, and ActionMailer, check
-out our [blog post](http://blog.iron.io/2012/06/powerful-email-infrastructure-with.html).
+For a detailed example using SendGrid, IronWorker, and Ringcaptcha, check
+out our [docs](https://github.com/iron-io/iron-worker-examples).
 
 ### Preparing the Headers
 
@@ -86,8 +85,7 @@ are often not impressed with 9 hour delays between an event and receiving a
 notification of it. As your usage and user base grow, a single task that
 processes notifications one at a time will quickly become inadequate.
 
-As with the [transformation of a 9-hour job to a 9-minute job](http://blog.iron.io/2012/03/how-to-reduce-9-hour-job-into-10-minute.html),
-the solution to this lies in massive parallelisation. By queuing tens, hundreds,
+The solution to this lies in massive parallelisation. By queuing tens, hundreds,
 or thousands of tasks to manage your queue, you can process a staggering
 amount of notifications and emails in a brief time period. Many hands makes
 light work.
